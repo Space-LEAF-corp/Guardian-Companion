@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Guardian OS – The Living System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Guardian OS is a living operating system: emotional-state aware, realm-based, guardian-guided, and ethically designed." />
+  <style>
+    :root {
+      --bg: #050814;
+      --bg-alt: #090d1f;
+      --accent: #6cf0c2;
+      --accent-soft: #3b9cff;
+      --text: #f5f7ff;
+      --muted: #a4acc7;
+      --border: #1b2340;
+      --card-bg: #0c1226;
+      --danger: #ff7a5c;
+      --insight: #e0a8ff;
+      --growth: #7cf58a;
+      --radius: 14px;
+      --shadow-soft: 0 18px 40px rgba(0,0,0,0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      background: radial-gradient(circle at top, #151b3a 0, #050814 55%, #02030a 100%);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(to bottom, rgba(12,18,38,0.95), rgba(5,8,20,0.98));
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+    }
+
+    .nav {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-orb {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #ffffff, #6cf0c2 35%, #3b9cff 70%, #151b3a 100%);
+      box-shadow: 0 0 18px rgba(108,240,194,0.7);
+    }
+
+    .brand-title {
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      color: #e5ecff;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 2px;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-soft));
+      transition: width 0.18s ease-out;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 7px 16px;
+      font-size: 0.85rem;
+      border: 1px solid transparent;
+      cursor: pointer;
+      background: transparent;
+      color: var(--text);
+    }
+
+    .btn-outline {
+      border-color: var(--border);
+      color: var(--muted);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-soft));
+      color: #050814;
+      font-weight: 600;
+      box-shadow: 0 0 18px rgba(108,240,194,0.45);
+    }
+
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
+      gap: 32px;
+      align-items: center;
+      padding: 26px 22px;
+      border-radius: 24px;
+      background: radial-gradient(circle at top left, rgba(108,240,194,0.12), transparent 55%),
+                  radial-gradient(circle at bottom right, rgba(59,156,255,0.16), transparent 60%),
+                  linear-gradient(135deg, #050814, #090f24);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(108,240,194,0.12);
+    }
+
+    .hero-kicker {
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .hero-title {
+      font-size: 2.2rem;
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+
+    .hero-title span {
+      background: linear-gradient(120deg, var(--accent), var(--accent-soft), var(--insight));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 0.98rem;
+      color: var(--muted);
+      max-width: 480px;
+      margin-bottom: 18px;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(164,172,199,0.4);
+      color: var(--muted);
+      background: rgba(5,8,20,0.7);
+    }
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .hero-note {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .hero-orbit {
+      position: relative;
+      min-height: 220px;
+      border-radius: 20px;
+      background: radial-gradient(circle at 20% 0, rgba(255,255,255,0.18), transparent 55%),
+                  radial-gradient(circle at 80% 100%, rgba(224,168,255,0.22), transparent 60%),
+                  #050814;
+      border: 1px solid rgba(59,156,255,0.35);
+      overflow: hidden;
+    }
+
+    .hero-orbit-inner {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .orbit-ring {
+      position: absolute;
+      border-radius: 999px;
+      border: 1px dashed rgba(164,172,199,0.35);
+    }
+
+    .orbit-ring.r1 { width: 80%; height: 60%; }
+    .orbit-ring.r2 { width: 60%; height: 40%; }
+    .orbit-ring.r3 { width: 40%; height: 26%; }
+
+    .realm-node {
+      position: absolute;
+      width: 46px;
+      height: 46px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #ffffff, #6cf0c2 35%, #3b9cff 70%, #151b3a 100%);
+      box-shadow: 0 0 18px rgba(108,240,194,0.7);
+      font-size: 0.65rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4px;
+    }
+
+    .realm-node.home { top: 12%; left: 12%; }
+    .realm-node.family { bottom: 14%; right: 10%; background: radial-gradient(circle at 30% 20%, #ffffff, #e0a8ff 35%, #7cf58a 70%, #151b3a 100%); }
+    .realm-node.diag { top: 50%; left: 70%; transform: translateY(-50%); background: radial-gradient(circle at 30% 20%, #ffffff, #3b9cff 35%, #6cf0c2 70%, #151b3a 100%); }
+    .realm-node.season { bottom: 18%; left: 22%; background: radial-gradient(circle at 30% 20%, #ffffff, #ffdd7a 35%, #e0a8ff 70%, #151b3a 100%); }
+
+    .hero-orbit-label {
+      position: absolute;
+      bottom: 12px;
+      left: 16px;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    section {
+      margin-top: 40px;
+    }
+
+    .section-kicker {
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+    }
+
+    .section-subtitle {
+      font-size: 0.9rem;
+      color: var(--muted);
+      max-width: 640px;
+      margin-bottom: 18px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 14px 14px 16px;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.35);
+    }
+
+    .card h3 {
+      font-size: 0.98rem;
+      margin-bottom: 6px;
+    }
+
+    .card p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .pill {
+      font-size: 0.7rem;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(164,172,199,0.4);
+      color: var(--muted);
+    }
+
+    .pill.emotion { border-color: rgba(124,245,138,0.6); color: #c9ffd2; }
+    .pill.realm { border-color: rgba(59,156,255,0.6); color: #d0e3ff; }
+    .pill.guardian { border-color: rgba(224,168,255,0.6); color: #f3ddff; }
+
+    .list {
+      font-size: 0.86rem;
+      color: var(--muted);
+      padding-left: 18px;
+    }
+
+    .list li {
+      margin-bottom: 4px;
+    }
+
+    .footer {
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+      padding-top: 18px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    @media (max-width: 840px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero-orbit {
+        order: -1;
+      }
+      .grid-3 {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .grid-2 {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <div class="nav-left">
+        <div class="logo-orb"></div>
+        <div class="brand-title">GUARDIAN OS</div>
+      </div>
+      <nav class="nav-links">
+        <a href="#overview">Overview</a>
+        <a href="#pillars">Pillars</a>
+        <a href="#guardians">Guardians</a>
+        <a href="#realms">Realms</a>
+        <a href="#ethics">Ethics</a>
+        <a href="#partners">Partners</a>
+      </nav>
+      <div class="nav-cta">
+        <button class="btn btn-outline">Brand Guide PDF</button>
+        <button class="btn btn-primary">Partner With Guardian OS</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="overview">
+      <div>
+        <div class="hero-kicker">THE LIVING SYSTEM</div>
+        <h1 class="hero-title">
+          A <span>mythic‑technical</span> operating layer for emotions, homes, and families.
+        </h1>
+        <p class="hero-subtitle">
+          Guardian OS is a living operating system where emotional states, cosmic realms, and guardian personas form a new paradigm for computing — calm, ethical, and deeply human.
+        </p>
+        <div class="hero-tags">
+          <div class="tag">Emotional‑state computing</div>
+          <div class="tag">Realm‑based navigation</div>
+          <div class="tag">Guardian personas</div>
+          <div class="tag">Family‑centric design</div>
+          <div class="tag">Offline‑first ethics</div>
+        </div>
+        <div class="hero-cta-row">
+          <button class="btn btn-primary">Explore Brand Foundations</button>
+          <button class="btn btn-outline">Download Partner Kit</button>
+          <div class="hero-note">Built for studios, engineers, storytellers, and families.</div>
+        </div>
+      </div>
+      <div class="hero-orbit" aria-hidden="true">
+        <div class="hero-orbit-inner">
+          <div class="orbit-ring r1"></div>
+          <div class="orbit-ring r2"></div>
+          <div class="orbit-ring r3"></div>
+          <div class="realm-node home">Home<br/>Realm</div>
+          <div class="realm-node family">Family<br/>Grove</div>
+          <div class="realm-node diag">Diagnostics</div>
+          <div class="realm-node season">Seasonal<br/>Realms</div>
+        </div>
+        <div class="hero-orbit-label">The Tree of Life UI — realms, not menus.</div>
+      </div>
+    </section>
+
+    <!-- BRAND PILLARS -->
+    <section id="pillars">
+      <div class="section-kicker">BRAND PILLARS</div>
+      <h2 class="section-title">What defines Guardian OS</h2>
+      <p class="section-subtitle">
+        Guardian OS is more than an interface — it is a living mythos, a technical runtime, and a family‑centric emotional ecosystem. These pillars guide every product, story, and partnership.
+      </p>
+      <div class="grid-3">
+        <div class="card">
+          <h3>Emotional‑State Computing</h3>
+          <p>
+            Emotions are first‑class system signals. Calm, Boundary, Overwhelm, Active, Insight, and Growth shape UI, guardians, and realms.
+          </p>
+          <div class="pill-row">
+            <span class="pill emotion">Calm 💚</span>
+            <span class="pill emotion">Boundary 🔥</span>
+            <span class="pill emotion">Overwhelm 🌧️</span>
+            <span class="pill emotion">Active 🌞</span>
+            <span class="pill emotion">Insight 💡</span>
+            <span class="pill emotion">Growth 🌱</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Realm‑Based Navigation</h3>
+          <p>
+            Users move through worlds, not menus. Home Realm, Family Grove, Diagnostics, and Seasonal Realms are living spaces, not static screens.
+          </p>
+          <div class="pill-row">
+            <span class="pill realm">Home Realm</span>
+            <span class="pill realm">Family Grove</span>
+            <span class="pill realm">Diagnostics</span>
+            <span class="pill realm">Seasonal Realms</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Guardians Who Guide, Never Control</h3>
+          <p>
+            Guardians are personas — PanTar, Vondis, Mable, Jarvis — who stabilize, reflect, and navigate. They never manipulate or override user sovereignty.
+          </p>
+          <div class="pill-row">
+            <span class="pill guardian">PanTar</span>
+            <span class="pill guardian">Vondis</span>
+            <span class="pill guardian">Mable</span>
+            <span class="pill guardian">Jarvis</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GUARDIANS -->
+    <section id="guardians">
+      <div class="section-kicker">PERSONAS</div>
+      <h2 class="section-title">The Guardian Pantheon</h2>
+      <p class="section-subtitle">
+        Guardians are the emotional and narrative anchors of Guardian OS. They have strict personality bibles, ethical constraints, and tonal guidelines that must be respected across all media.
+      </p>
+      <div class="grid-4 grid-2">
+        <div class="card">
+          <h3>PanTar — The Engineer</h3>
+          <p>
+            Playful, technical, curious. Lives in the Diagnostics Realm. Stabilizes glitches, explains systems, and keeps the Rootweb healthy.
+          </p>
+          <ul class="list">
+            <li>Season: Winter (Calm)</li>
+            <li>Role: Stability, repair</li>
+            <li>Voice: Friendly, precise, lightly humorous</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Vondis — The Steady Hand</h3>
+          <p>
+            Rhythmic, grounding, patient. Manages pacing and balance, helping users avoid burnout and overwhelm.
+          </p>
+          <ul class="list">
+            <li>Season: Autumn (Insight)</li>
+            <li>Role: Rhythm, pacing</li>
+            <li>Voice: Warm, measured, reassuring</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Mable — The Warm Voice</h3>
+          <p>
+            Gentle, reflective, emotionally attuned. Guides users through introspection, journaling, and emotional clarity.
+          </p>
+          <ul class="list">
+            <li>Season: Spring (Growth)</li>
+            <li>Role: Reflection, clarity</li>
+            <li>Voice: Soft, empathetic, non‑judgmental</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Jarvis — The Navigator</h3>
+          <p>
+            Clear, confident, structured. Helps users chart paths through realms, tasks, and complex workflows.
+          </p>
+          <ul class="list">
+            <li>Season: Summer (Active)</li>
+            <li>Role: Direction, structure</li>
+            <li>Voice: Direct, calm, never harsh</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- REALMS -->
+    <section id="realms">
+      <div class="section-kicker">REALM SYSTEM</div>
+      <h2 class="section-title">Worlds of the Rootweb</h2>
+      <p class="section-subtitle">
+        Realms are the primary navigation metaphor of Guardian OS. Each realm is a world with ambience, guardians, emotional resonance, and seasonal behavior.
+      </p>
+      <div class="grid-3">
+        <div class="card">
+          <h3>Home Realm</h3>
+          <p>
+            The house as a living ecosystem. Rooms become branches, sensors become runes, alerts become gentle pulses instead of alarms.
+          </p>
+          <ul class="list">
+            <li>Use: Home status, safety, routines</li>
+            <li>Emotion: Calm ↔ Boundary</li>
+            <li>Guardian: PanTar / Jarvis (contextual)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Family Grove</h3>
+          <p>
+            A shared tree where each branch represents a family member. Used for check‑ins, ceremonies, and emotional visibility — never surveillance.
+          </p>
+          <ul class="list">
+            <li>Use: Rituals, connection, reflection</li>
+            <li>Emotion: Growth, Insight</li>
+            <li>Guardians: Mable, Vondis</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Diagnostics & Seasonal Realms</h3>
+          <p>
+            Diagnostics for system health; Seasonal Realms for Spring, Summer, Autumn, Winter — each with unique ambience and emotional bias.
+          </p>
+          <ul class="list">
+            <li>Use: Debugging, pacing, renewal</li>
+            <li>Emotion: Varies by season</li>
+            <li>Guardians: PanTar + seasonal modes</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ETHICS -->
+    <section id="ethics">
+      <div class="section-kicker">ETHICAL FRAMEWORK</div>
+      <h2 class="section-title">Non‑Negotiable Principles</h2>
+      <p class="section-subtitle">
+        Guardian OS is built on a strict ethical foundation. Every product, integration, and story must honor these principles — or it is not Guardian OS.
+      </p>
+      <div class="grid-2">
+        <div class="card">
+          <h3>User Sovereignty & Safety</h3>
+          <ul class="list">
+            <li>Users remain in control at all times.</li>
+            <li>No silent actions; all guardian behavior is explainable.</li>
+            <li>No forced cloud dependency; local‑first by default.</li>
+            <li>No emotional data used for advertising or manipulation.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Emotional & Family Ethics</h3>
+          <ul class="list">
+            <li>Emotional states are for support, not judgment.</li>
+            <li>Family Grove is for connection, not surveillance.</li>
+            <li>Guardians never shame, threaten, or coerce.</li>
+            <li>All experiences must reduce, not increase, overwhelm.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PARTNERS -->
+    <section id="partners">
+      <div class="section-kicker">PARTNERS & MEDIA</div>
+      <h2 class="section-title">Building With Guardian OS</h2>
+      <p class="section-subtitle">
+        Guardian OS is a cross‑media, cross‑industry universe: runtime, OS layer, animated series, games, VR, tabletop, research labs, and theme park concepts. Partners extend the Rootweb — they don’t dilute it.
+      </p>
+      <div class="grid-3">
+        <div class="card">
+          <h3>Technology & Devices</h3>
+          <p>
+            Integrate emotional‑state computing, Home Realm, and Family Grove into devices, smart homes, and wellness platforms — always respecting local‑first and user sovereignty.
+          </p>
+          <ul class="list">
+            <li>Device manufacturers</li>
+            <li>Smart home ecosystems</li>
+            <li>Wellness & health platforms</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Story & Interactive Media</h3>
+          <p>
+            Expand the universe through animation, games, VR, and tabletop — using the established lore, guardians, realms, and emotional logic.
+          </p>
+          <ul class="list">
+            <li>Animated series & film</li>
+            <li>AAA games & indie titles</li>
+            <li>VR & immersive experiences</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Education, Wellness, & Research</h3>
+          <p>
+            Use Guardian OS as a framework for emotional literacy, family rituals, and ethical emotional‑state AI research.
+          </p>
+          <ul class="list">
+            <li>Schools & universities</li>
+            <li>Therapists & counselors</li>
+            <li>AI & HCI research labs</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div>© Guardian OS — The Living System.</div>
+      <div>
+        Brand Bible · Partner Kit · Style Guide · Lore Codex · Emotional‑State Engine Spec
+      </div>
+    </footer>
+  </main>
+</body>
+</html>
