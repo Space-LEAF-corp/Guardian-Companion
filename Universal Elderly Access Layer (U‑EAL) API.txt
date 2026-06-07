@@ -1,0 +1,213 @@
+Developer‑facing spec — v1.0
+
+This is the layer other modules plug into when they want elder‑safe behavior without reinventing it.
+
+---
+
+1. Core concepts
+
+• User Profile:
+Holds age, self‑declared comfort level, and accessibility preferences.
+• Mode State:
+Tracks whether elder_first is active, plus sub‑modes (slow_pace, high_contrast, narrated_guidance).
+• Capability Map:
+Describes what the user can comfortably do (tap, speak, read, hear).
+
+
+---
+
+2. Data models
+
+2.1 `EalUserProfile`
+
+type ComfortLevel = 'tech_confident' | 'tech_neutral' | 'tech_anxious';
+
+interface EalUserProfile {
+  userId: string;
+  age?: number;
+  comfortLevel: ComfortLevel;
+  prefersVoice: boolean;
+  prefersLargeText: boolean;
+  prefersHighContrast: boolean;
+  motorSupportNeeded: boolean;
+  cognitiveSupportNeeded: boolean;
+  lastUpdated: string; // ISO 8601
+}
+
+
+2.2 `EalModeState`
+
+type EalMode = 'normal' | 'elder_first';
+
+interface EalModeState {
+  userId: string;
+  activeMode: EalMode;
+  slowPaceEnabled: boolean;
+  narratedGuidanceEnabled: boolean;
+  highContrastEnabled: boolean;
+  largeTextEnabled: boolean;
+  motorSafeTouchEnabled: boolean;
+  cognitiveStepByStepEnabled: boolean;
+}
+
+
+2.3 `EalCapabilityMap`
+
+interface EalCapabilityMap {
+  userId: string;
+  canUseTouch: boolean;
+  canUseVoice: boolean;
+  canReadTextComfortably: boolean;
+  canHearAudioComfortably: boolean;
+  recommendedPrimaryInput: 'touch' | 'voice' | 'mixed';
+}
+
+
+---
+
+3. API endpoints (or local service methods)
+
+You can implement these as REST endpoints, local services, or class methods—same semantics.
+
+3.1 Initialize / update profile
+
+Purpose: Store or update elderly‑relevant preferences.
+
+POST /u-eal/profile
+
+
+Body:
+
+{
+  "userId": "string",
+  "age": 78,
+  "comfortLevel": "tech_anxious",
+  "prefersVoice": true,
+  "prefersLargeText": true,
+  "prefersHighContrast": true,
+  "motorSupportNeeded": true,
+  "cognitiveSupportNeeded": true
+}
+
+
+Returns: EalUserProfile
+
+---
+
+3.2 Get current mode state
+
+GET /u-eal/mode-state?userId={userId}
+
+
+Returns: EalModeState
+
+---
+
+3.3 Auto‑detect and activate Elder‑First Mode
+
+Purpose: Let the system decide when to turn on elder‑first behavior.
+
+POST /u-eal/detect-and-activate
+
+
+Body:
+
+{
+  "userId": "string",
+  "age": 78,
+  "observedHesitation": true,
+  "observedTremor": true,
+  "userPhrase": "I'm not good with technology"
+}
+
+
+Returns: EalModeState
+
+---
+
+3.4 Manually toggle Elder‑First Mode
+
+Purpose: Let the user or app explicitly turn it on/off.
+
+POST /u-eal/set-mode
+
+
+Body:
+
+{
+  "userId": "string",
+  "activeMode": "elder_first",
+  "slowPaceEnabled": true,
+  "narratedGuidanceEnabled": true,
+  "highContrastEnabled": true,
+  "largeTextEnabled": true,
+  "motorSafeTouchEnabled": true,
+  "cognitiveStepByStepEnabled": true
+}
+
+
+Returns: EalModeState
+
+---
+
+3.5 Get capability map
+
+Purpose: Let UI and interaction engines adapt to what the user can comfortably do.
+
+GET /u-eal/capabilities?userId={userId}
+
+
+Returns: EalCapabilityMap
+
+---
+
+4. Integration hooks
+
+4.1 UI layer hook
+
+Hook name: onEalModeStateChanged(modeState: EalModeState)
+
+Responsibilities:
+
+• If elder_first:• Enable: large text, high contrast, simplified menus, long‑press buttons
+• Disable: tiny touch targets, fast animations, double‑tap gestures
+
+
+
+---
+
+4.2 Voice / narration hook
+
+Hook name: onEalNarrationRequested(userId: string, stepId: string)
+
+• Fetch current EalModeState
+• If narratedGuidanceEnabled === true, play:• Calm, slow narration
+• Optional “you’re doing great” affirmations
+
+
+
+---
+
+4.3 Error handling hook
+
+Hook name: onEalError(userId: string, errorCode: string)
+
+• If activeMode === 'elder_first':• Replace harsh error messages with:• “Let’s try that again gently.”
+• “No worries, I’ll walk you through it.”
+
+
+
+
+---
+
+5. Example flow
+
+1. User signs in → POST /u-eal/profile
+2. System calls POST /u-eal/detect-and-activate based on age + behavior
+3. EalModeState returns elder_first with slow pace, narration, high contrast
+4. UI listens to onEalModeStateChanged and adjusts layout
+5. Voice engine uses onEalNarrationRequested for each step
+6. Any error routes through onEalError for gentle handling
+
+
+---
