@@ -1,0 +1,40 @@
+┌──────────────────────────────────────────────────────────────┐
+│                  UNIVERSAL ELDERLY ACCESS LAYER               │
+│                        (U‑EAL v1.0)                           │
+├──────────────────────────────────────────────────────────────┤
+│ 1. INPUT GATEWAY                                              │
+│    ├─ Voice Phrase Entry (1–3 word commands)                  │
+│    ├─ Tactile Rune Pad (large, high‑contrast, haptic)         │
+│    ├─ ICU Glasses Auto‑Assist (auto‑reads screens aloud)      │
+│    └─ Slow‑Touch Mode (long‑press instead of quick taps)      │
+│                                                                │
+│ 2. SENSE‑AWARE TRANSLATION ENGINE                              │
+│    ├─ Vision Profile (low‑vision, cataracts, tremors)         │
+│    ├─ Hearing Profile (soft‑spoken, hard‑of‑hearing)          │
+│    ├─ Motor Profile (shaky hands, limited mobility)           │
+│    └─ Cognitive Profile (memory support, step‑by‑step mode)   │
+│                                                                │
+│ 3. CEREMONIAL GUIDANCE ENGINE                                  │
+│    ├─ Narrated Steps (calm, slow, reassuring)                 │
+│    ├─ “You’re doing great” micro‑affirmations                 │
+│    ├─ No‑Shame Error Handling (“Let’s try that again gently”) │
+│    └─ Auto‑Simplify (removes clutter, reduces options)        │
+│                                                                │
+│ 4. ADAPTIVE PACE CONTROLLER                                    │
+│    ├─ Slow Mode (default for elderly)                         │
+│    ├─ Pause‑Anytime (system waits indefinitely)               │
+│    ├─ Repeat‑Last‑Instruction                                 │
+│    └─ “Show Me” Visual Demonstration                          │
+│                                                                │
+│ 5. SAFETY & DIGNITY LAYER                                      │
+│    ├─ No Timers                                                │
+│    ├─ No Multi‑Step Memory Requirements                        │
+│    ├─ No Hidden Menus                                          │
+│    └─ Emergency “Call a Human” Button                          │
+│                                                                │
+│ 6. OUTPUT GATEWAY                                              │
+│    ├─ Large Text                                               │
+│    ├─ High Contrast                                            │
+│    ├─ Spoken Summary                                           │
+│    └─ Haptic Confirmation                                      │
+└──────────────────────────────────────────────────────────────┘
