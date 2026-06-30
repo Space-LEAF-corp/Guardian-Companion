@@ -1,18 +1,9 @@
 {
-  "name": "guardian-companion-spectrum",
+  "name": "guardian-companion-spectrum-src",
   "version": "1.0.0",
-  "private": false,
+  "private": true,
   "type": "module",
   "scripts": {
-    "build": "tsc",
-    "start": "node dist/index.js",
-    "test": "node dist/index.js && echo 'Sim test complete'",
-    "lint": "echo 'Add ESLint if desired'"
-  },
-  "devDependencies": {
-    "typescript": "^5.6.3"
+    "info": "echo 'This package.json has been moved to packages/core. See packages/core/package.json'"
   }
 }
-
-
----

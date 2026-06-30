@@ -1,0 +1,14 @@
+{
+  "name": "guardian-companion-core",
+  "version": "1.0.0",
+  "private": false,
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc -p ../../tsconfig.json",
+    "test": "npm run build && node dist/index.js"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3"
+  }
+}

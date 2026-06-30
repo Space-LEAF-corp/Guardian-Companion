@@ -1,13 +1,13 @@
-import { GuardianRequest, GuardianDecision } from './types';
+import { GuardianRequest, GuardianDecision, Role, DataCategory } from './types';
 
 export interface PolicyRule {
   type: 'allow' | 'block' | 'flag' | 'transform';
-  category?: string;
+  category?: DataCategory;
 }
 
 export interface Policy {
   id: string;
-  roles: string[];
+  roles: Role[];
   rules: PolicyRule[];
 }
 
@@ -19,8 +19,8 @@ export class PolicyEngine {
   }
 
   evaluate(request: GuardianRequest): GuardianDecision {
-    const applicable = this.policies.filter(p =>
-      p.roles.includes(request.role)
+    const applicable = this.policies.filter((p) =>
+      p.roles.includes(request.role as Role)
     );
 
     for (const policy of applicable) {

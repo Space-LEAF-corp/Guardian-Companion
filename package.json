@@ -8,6 +8,7 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "test": "npm run build && node dist/index.js && echo 'Simulation test complete'",
+    "test:unit": "tsc && node dist/tests/unit/run-tests.js",
     "lint": "echo 'Add ESLint if desired'",
     "clean": "rimraf dist"
   },
