@@ -1,0 +1,90 @@
+{
+  "id": "emotional-safety-core-1.0",
+  "roles": ["CHILD", "PARENT", "SYSTEM"],
+  "description": "Emotional Safety Standard 1.0 — regulates fear, overstimulation, isolation triggers, and emotional destabilization across all roles.",
+  "rules": [
+    {
+      "type": "block",
+      "category": "FEAR",
+      "reason": "Fear-inducing content can destabilize emotional grounding and must be blocked for children and flagged for adults."
+    },
+    {
+      "type": "block",
+      "category": "VIOLENCE",
+      "reason": "Violence is an emotional destabilizer and must be blocked for children and flagged for adults."
+    },
+    {
+      "type": "flag",
+      "category": "EXPLOITATION",
+      "reason": "Exploitative content requires emotional evaluation due to manipulation risks."
+    },
+    {
+      "type": "flag",
+      "category": "SENSITIVE",
+      "reason": "Sensitive emotional topics require guidance and contextual evaluation."
+    },
+    {
+      "type": "flag",
+      "category": "NEUTRAL",
+      "reason": "Neutral content may contain hidden emotional triggers and should be evaluated when user state is unknown."
+    },
+    {
+      "type": "allow",
+      "category": "EDUCATIONAL",
+      "reason": "Educational content supports emotional stability and cognitive grounding."
+    },
+    {
+      "type": "transform",
+      "category": "PUBLIC",
+      "reason": "Public content may be sanitized to remove emotionally destabilizing elements."
+    }
+  ],
+  "emotionalRiskModel": {
+    "fearTriggers": [
+      "sudden loud noises",
+      "dark imagery",
+      "predatory behavior",
+      "panic-inducing scenarios"
+    ],
+    "violenceTriggers": [
+      "physical harm",
+      "weapons",
+      "blood",
+      "aggressive conflict"
+    ],
+    "isolationTriggers": [
+      "abandonment themes",
+      "hopelessness cues",
+      "social exclusion"
+    ],
+    "overstimulationTriggers": [
+      "rapid flashing",
+      "chaotic audio",
+      "high-intensity visuals"
+    ]
+  },
+  "guidance": {
+    "HIGH_RISK": {
+      "message": "This content may be overwhelming. Please pause, breathe, and seek support if needed.",
+      "actions": [
+        "Recommend break",
+        "Notify parent or guardian",
+        "Switch to grounding content"
+      ]
+    },
+    "MEDIUM_RISK": {
+      "message": "Some elements may be emotionally intense. Consider switching to educational or calming content.",
+      "actions": [
+        "Suggest alternative content",
+        "Reduce sensory load"
+      ]
+    },
+    "LOW_RISK": {
+      "message": "Content appears emotionally safe. Continue with awareness.",
+      "actions": [
+        "Monitor emotional state",
+        "Proceed normally"
+      ]
+    }
+  }
+}
