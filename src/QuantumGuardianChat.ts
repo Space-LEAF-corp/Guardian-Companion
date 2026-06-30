@@ -1,12 +1,13 @@
 /**
- * QuantumGuardianChat 1.0
+ * QuantumGuardianChat 1.1
  * Space LEAF Corp — Quantum Guardian Conversation Layer
  *
- * Orchestrates chat between the user, Guardian core, and QuantumDomain.
+ * Now includes Quantum Safety Policy routing via evaluateQuantumPolicy().
  */
 
 import { Guardian } from "./Guardian";
 import { QuantumDomain } from "./QuantumDomain";
+import { evaluateQuantumPolicy } from "./policies/quantumPolicy";
 
 export type QuantumRole = "CHILD" | "STUDENT" | "ADULT" | "RESEARCHER";
 
@@ -21,61 +22,105 @@ export class QuantumGuardianChat {
 
   /**
    * Handle a single chat message.
-   * 1. Build a GuardianRequest.
-   * 2. Ask Guardian if this interaction is allowed.
-   * 3. If allowed, route to QuantumDomain.
-   * 4. Return a safe, educational response.
+   * Safety flow:
+   * 1. Guardian emotional + policy safety
+   * 2. Quantum Safety Policy (evaluateQuantumPolicy)
+   * 3. QuantumDomain reasoning
    */
   async handleMessage(input: string, role: QuantumRole): Promise<string> {
-    const request = {
+    // Step 1 — Guardian safety
+    const guardianRequest = {
       role,
       category: "EDUCATIONAL",
       action: "chat"
     };
 
-    const decision = this.guardian.decide(request);
+    const guardianDecision = this.guardian.decide(guardianRequest);
 
-    if (!decision.allowed) {
+    if (!guardianDecision.allowed) {
       return (
-        decision.guidance ??
-        "Quantum Guardian: This interaction is currently restricted for safety reasons."
+        guardianDecision.guidance ??
+        "Quantum Guardian: This interaction is restricted for safety reasons."
       );
     }
 
-    // Simple routing: decide whether user wants explanation, circuit, or review
+    // Step 2 — Quantum Safety Policy routing
+    const quantumCategory = this.detectQuantumCategory(input);
+    const quantumDecision = evaluateQuantumPolicy(quantumCategory);
+
+    if (!quantumDecision.allowed) {
+      return (
+        quantumDecision.guidance ??
+        "Quantum Guardian: This quantum interaction type is not allowed."
+      );
+    }
+
+    // Step 3 — QuantumDomain reasoning
     const lower = input.toLowerCase();
 
     if (lower.includes("explain") || lower.includes("what is")) {
-      return this.quantum.explainConcept(input);
+      return quantumDecision.guidance + "\n\n" + this.quantum.explainConcept(input);
     }
 
     if (lower.includes("circuit") || lower.includes("build") || lower.includes("prepare")) {
-      return this.quantum.suggestCircuit(input);
+      return quantumDecision.guidance + "\n\n" + this.quantum.suggestCircuit(input);
     }
 
     if (lower.includes("code") || lower.includes("qiskit") || lower.includes("snippet")) {
       const review = this.quantum.reviewCode(input);
-      return [
-        "Quantum Guardian — Code Review:",
-        "",
-        review.summary,
-        "",
-        review.issues.length
-          ? "Issues:\n- " + review.issues.join("\n- ")
-          : "Issues: none detected at this static level.",
-        "",
-        review.suggestions.length
-          ? "Suggestions:\n- " + review.suggestions.join("\n- ")
-          : "Suggestions: none beyond structural clarity."
-      ].join("\n");
+      return (
+        quantumDecision.guidance +
+        "\n\nQuantum Guardian — Code Review:\n\n" +
+        review.summary +
+        "\n\nIssues:\n" +
+        (review.issues.length ? "- " + review.issues.join("\n- ") : "None detected.") +
+        "\n\nSuggestions:\n" +
+        (review.suggestions.length ? "- " + review.suggestions.join("\n- ") : "None.")
+      );
     }
 
     return (
-      "Quantum Guardian: I can explain quantum concepts, suggest simple circuits, " +
-      "or give an educational review of your quantum code. Try:\n" +
+      quantumDecision.guidance +
+      "\n\nQuantum Guardian: I can explain quantum concepts, suggest circuits, " +
+      "or review quantum code. Try:\n" +
       "- 'Explain qubits'\n" +
       "- 'Suggest a circuit for a 3-qubit GHZ state'\n" +
       "- 'Review this Qiskit code snippet: ...'"
     );
+  }
+
+  /**
+   * Detect the quantum category based on user intent.
+   */
+  private detectQuantumCategory(input: string) {
+    const lower = input.toLowerCase();
+
+    if (
+      lower.includes("explain") ||
+      lower.includes("what is") ||
+      lower.includes("how does")
+    ) {
+      return "QUANTUM_EDUCATIONAL";
+    }
+
+    if (
+      lower.includes("simulate") ||
+      lower.includes("experiment") ||
+      lower.includes("prepare") ||
+      lower.includes("circuit")
+    ) {
+      return "QUANTUM_EXPERIMENTAL";
+    }
+
+    if (
+      lower.includes("future") ||
+      lower.includes("could quantum") ||
+      lower.includes("break encryption") ||
+      lower.includes("hypothetical")
+    ) {
+      return "QUANTUM_SPECULATIVE";
+    }
+
+    return "QUANTUM_EDUCATIONAL";
   }
 }
