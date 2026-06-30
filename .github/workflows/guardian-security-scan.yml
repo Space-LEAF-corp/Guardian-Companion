@@ -1,0 +1,47 @@
+name: Guardian Security Scan
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  schedule:
+    - cron: "0 3 * * *"   # Daily 3 AM UTC security scan
+
+jobs:
+  security-audit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run npm audit
+        run: npm audit --audit-level=moderate
+
+      - name: Run security scanner (OSS Index)
+        uses: sonatype-nexus-community/iq-github-action@v1
+        with:
+          iq-server-url: "https://ossindex.sonatype.org"
+          application-id: "guardian-companion"
+          stage: "build"
+
+      - name: Run CodeQL security analysis
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript
+
+      - name: Perform CodeQL analysis
+        uses: github/codeql-action/analyze@v3
+
+      - name: Security Scan Complete
+        run: echo "Guardian-Companion security scan completed successfully."
