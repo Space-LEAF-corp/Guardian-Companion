@@ -1,14 +1,27 @@
-Guardian Companion Spectrum Protocol 1.0
-Copyright (c) 2025 Space LEAF Corp
 
-This code is given freely for public use, study, and modification.  
-No personal information is collected, and all use must respect lineage-safe principles of safety and stewardship.
+---
 
-Any and all profits derived from commercial use, resale, or distribution of this code or derivative works must be directed to Space LEAF Corp, a nonprofit organization, for distribution through the United Nations Children’s programs.
+### CONTRIBUTING.md (repo root)
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, subject to the conditions above.
+```markdown
+# Contributing to Guardian-Companion
 
-WARRANTY AND LIABILITY:  
-Any and all products, services, or commercial releases derived from this code are the sole responsibility of the company or entity that distributes them. The author(s) of this code bear no liability for defects, damages, or obligations arising from such products. All warranty claims must be handled by the releasing company, not the original author.
+Thank you for helping improve Guardian-Companion. This project exists to protect children, families, and crew in digital and deep-space environments.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED.
+---
+
+## Code of Conduct
+
+- **Respect dignity** — no harmful, exploitative, or discriminatory content.
+- **Protect children** — all contributions must align with kid-safe principles.
+- **Honor emotional safety** — avoid designs that encourage fear, isolation, or manipulation.
+
+---
+
+## Development Setup
+
+1. **Clone the repo**
+
+```bash
+git clone https://github.com/Space-LEAF-corp/Guardian-Companion.git
+cd Guardian-Companion
