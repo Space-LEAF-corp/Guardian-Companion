@@ -1,13 +1,14 @@
 {
   "name": "guardian-companion-spectrum",
   "version": "1.0.0",
-  "private": false,
+  "private": true,
   "type": "module",
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
     "test": "npm run build && node dist/index.js && echo 'Simulation test complete'",
-    "lint": "echo 'Add ESLint if desired'"
+    "lint": "echo 'Add ESLint if desired'",
+    "clean": "rm -rf dist"
   },
   "devDependencies": {
     "typescript": "^5.6.3"
