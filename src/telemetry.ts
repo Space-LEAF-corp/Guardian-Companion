@@ -15,6 +15,3 @@ export class Telemetry {
     return clone;
   }
 }
-
-
----

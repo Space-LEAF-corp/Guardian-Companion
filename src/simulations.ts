@@ -72,6 +72,3 @@ export async function runAllSimulations() {
     state: guardian.currentState(),
   };
 }
-
-
----

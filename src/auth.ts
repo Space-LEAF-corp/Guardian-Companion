@@ -24,6 +24,3 @@ export class Auth {
     return actor.role === "adult" || actor.capabilities.includes("GUARDIAN_MODE");
   }
 }
-
-
----
