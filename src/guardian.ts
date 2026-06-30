@@ -1,40 +1,40 @@
-import { Auth, Actor } from "./auth";
-import { Alerts } from "./alerts";
-import { Config } from "./config";
-
-type GuardianState = "IDLE" | "OBSERVING" | "GUARDIAN_ACTIVE";
+import { GuardianRequest, GuardianDecision, AuditEvent } from './types';
+import { IdentityGuard } from './IdentityGuard';
+import { PrivacyShield } from './PrivacyShield';
+import { PolicyEngine } from './PolicyEngine';
+import { AuditTrail } from './AuditTrail';
 
 export class Guardian {
-  private state: GuardianState = "IDLE";
-  constructor(private auth: Auth, private alerts: Alerts) {}
+  private identityGuard = new IdentityGuard();
+  private privacyShield = new PrivacyShield();
+  private policyEngine = new PolicyEngine();
+  private auditTrail = new AuditTrail();
 
-  activateGuardianMode(requestor: Actor, context: { alone: boolean }) {
-    if (requestor.role === "adult" && Config.auth.requireAdultForGuardianMode) {
-      this.state = "GUARDIAN_ACTIVE";
-      return { ok: true, message: "Guardian Mode active for adult." };
-    }
-    if (requestor.role === "child" && Config.auth.allowChildGuardianIfAlone && context.alone) {
-      this.state = "GUARDIAN_ACTIVE";
-      const alert = {
-        childId: requestor.id,
-        message: "Your child feels unsafe. Would you like to check in?",
-        timestamp: Date.now(),
-      };
-      this.alerts.sendParentalAlert(alert);
-      return { ok: true, message: "Guardian Mode active for child; parental alert sent." };
-    }
-    return { ok: false, message: "Guardian Mode not permitted in current context." };
+  evaluate(request: GuardianRequest): GuardianDecision {
+    const role = this.identityGuard.classifyRole(request);
+    const sanitized = this.privacyShield.sanitize({ ...request, role });
+    const minimized = this.privacyShield.minimize(sanitized);
+
+    const decision = this.policyEngine.evaluate(minimized);
+
+    const auditEvent: AuditEvent = {
+      timestamp: new Date().toISOString(),
+      event: minimized.action,
+      severity: decision.allowed ? 'INFO' : 'BLOCK',
+      role,
+      metadata: { category: minimized.category, redacted: true },
+    };
+
+    this.auditTrail.log(auditEvent);
+
+    return decision;
   }
 
-  observe() {
-    this.state = "OBSERVING";
-    return { ok: true, message: "Guardian observing calmly." };
+  loadPolicies(policies: Parameters<PolicyEngine['loadPolicies']>[0]): void {
+    this.policyEngine.loadPolicies(policies);
   }
 
-  currentState() {
-    return this.state;
+  getAuditEvents(): AuditEvent[] {
+    return this.auditTrail.getEvents();
   }
 }
-
-
----
