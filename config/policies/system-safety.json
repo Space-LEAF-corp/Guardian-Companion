@@ -1,0 +1,52 @@
+{
+  "id": "system-safety-core-1.0",
+  "roles": ["SYSTEM"],
+  "description": "Core safety rules for system and backend processes. Enforces strict data handling, prevents overcollection, and protects child and sensitive domains.",
+  "rules": [
+    {
+      "type": "block",
+      "category": "CHILD",
+      "reason": "System processes must not directly access child-specific domains without explicit guardian mediation."
+    },
+    {
+      "type": "block",
+      "category": "EXPLOITATION",
+      "reason": "System processes must never participate in exploitative patterns or manipulative behavior."
+    },
+    {
+      "type": "block",
+      "category": "SENSITIVE",
+      "reason": "Sensitive data must not be processed without explicit, minimal, and logged justification."
+    },
+    {
+      "type": "flag",
+      "category": "VIOLENCE",
+      "reason": "Violence-related operations require elevated scrutiny and audit logging."
+    },
+    {
+      "type": "flag",
+      "category": "FEAR",
+      "reason": "Fear-related content or signals must be evaluated for emotional impact on human users."
+    },
+    {
+      "type": "transform",
+      "category": "PUBLIC",
+      "reason": "Public data may be sanitized or minimized before storage or transmission."
+    },
+    {
+      "type": "allow",
+      "category": "NEUTRAL",
+      "reason": "Neutral operational data is allowed, subject to standard privacy safeguards."
+    },
+    {
+      "type": "allow",
+      "category": "EDUCATIONAL",
+      "reason": "Educational and training-related data is allowed and encouraged for crew and system improvement."
+    }
+  ],
+  "operationalConstraints": {
+    "requireAuditOnBlock": true,
+    "requireAuditOnFlag": true,
+    "minimizeByDefault": true
+  }
+}
