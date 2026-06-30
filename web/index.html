@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quantum Guardian</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div id="app">
+    <header>
+      <h1>Quantum Guardian</h1>
+      <p class="subtitle">A governed, emotionally-safe quantum assistant</p>
+    </header>
+
+    <main>
+      <div id="chat-window"></div>
+
+      <div id="input-area">
+        <input id="message-input" type="text" placeholder="Ask about qubits, circuits, GHZ states..." />
+        <select id="role-select">
+          <option value="STUDENT">Student</option>
+          <option value="ADULT">Adult</option>
+          <option value="RESEARCHER">Researcher</option>
+          <option value="CHILD">Child</option>
+        </select>
+        <button id="send-btn">Send</button>
+      </div>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
