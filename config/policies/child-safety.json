@@ -1,0 +1,47 @@
+{
+  "id": "child-safety-core-1.0",
+  "roles": ["CHILD"],
+  "description": "Core safety rules for child users. Enforces emotional safety, blocks harmful content, and ensures humane digital interaction.",
+  "rules": [
+    {
+      "type": "block",
+      "category": "VIOLENCE",
+      "reason": "Children must not be exposed to violent content."
+    },
+    {
+      "type": "block",
+      "category": "FEAR",
+      "reason": "Fear-inducing content can destabilize emotional safety."
+    },
+    {
+      "type": "block",
+      "category": "EXPLOITATION",
+      "reason": "Exploitative content is strictly prohibited for children."
+    },
+    {
+      "type": "block",
+      "category": "SENSITIVE",
+      "reason": "Sensitive personal data must never be shown or collected from children."
+    },
+    {
+      "type": "flag",
+      "category": "NEUTRAL",
+      "reason": "Neutral content may require emotional evaluation depending on context."
+    },
+    {
+      "type": "allow",
+      "category": "EDUCATIONAL",
+      "reason": "Educational content is encouraged and safe for child learning."
+    },
+    {
+      "type": "transform",
+      "category": "PUBLIC",
+      "reason": "Public content may be sanitized to remove unsafe elements."
+    }
+  ],
+  "emotionalGuidance": {
+    "HIGH_RISK": "This content may be overwhelming. Please take a break or ask a parent for help.",
+    "MEDIUM_RISK": "Some elements may be confusing or intense. Consider switching to educational content.",
+    "LOW_RISK": "Content appears safe. Continue with awareness."
+  }
+}
