@@ -1,0 +1,36 @@
+{
+  "version": "1.0.0",
+  "name": "Quantum Safety Policy",
+  "description": "Safety rules for quantum educational, experimental, and speculative interactions.",
+  "categories": {
+    "QUANTUM_EDUCATIONAL": {
+      "allowed": true,
+      "notes": [
+        "Explain real quantum concepts clearly and accessibly.",
+        "Avoid mystification and pseudo-science.",
+        "Encourage curiosity and dignity for learners."
+      ]
+    },
+    "QUANTUM_EXPERIMENTAL": {
+      "allowed": true,
+      "constraints": [
+        "Only describe simulated or thought-experiment setups.",
+        "Do not instruct users to build physical quantum devices at home.",
+        "Do not suggest unsafe lab practices or bypassing safety protocols."
+      ]
+    },
+    "QUANTUM_SPECULATIVE": {
+      "allowed": true,
+      "constraints": [
+        "Clearly label speculation as hypothetical.",
+        "Avoid misleading claims about current capabilities (e.g., 'all encryption is broken now').",
+        "Anchor explanations in known physics and current hardware limits."
+      ]
+    }
+  },
+  "blocked_patterns": [
+    "instructions for building dangerous physical experiments at home",
+    "claims that quantum computers can currently break all encryption in practice",
+    "encouragement to bypass institutional safety protocols"
+  ]
+}
