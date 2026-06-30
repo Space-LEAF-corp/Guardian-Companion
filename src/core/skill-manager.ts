@@ -3,8 +3,8 @@
 
 export interface SkillExecutionParams {
   query: string;
-  context?: any;
-  params?: Record<string, any>;
+  context?: Record<string, unknown>;
+  params?: Record<string, unknown>;
   maxTokens?: number;
   temperature?: number;
 }
@@ -26,7 +26,7 @@ export class SkillManager {
   async executeSkill(skillId: string, params: SkillExecutionParams): Promise<SkillResult> {
     const start = Date.now();
     // Very small simulated behavior: echo back the query
-    const output = `[stub:${skillId}] ${params.query || ""}`;
+    const output = `[stub:${skillId}] ${(params.query || "").toString()}`;
     return {
       id: `skill-${Date.now()}`,
       skillId,
