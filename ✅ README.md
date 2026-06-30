@@ -1,3 +1,39 @@
+# Guardian-Companion
+
+Guardian-Companion is a privacy-first, kid-safe, emotionally aware guardian engine for apps, devices, and deep-space systems.
+
+It sits between your application and the user, enforcing humane digital behavior: protecting identity, minimizing data, filtering unsafe content, and applying emotional safety standards.
+
+---
+
+## Mission
+
+- **Protect children and families** from harmful or overwhelming content.
+- **Minimize data collection** and prevent identity exploitation.
+- **Support emotional safety** in digital and deep-space environments.
+- **Provide a reusable guardian engine** that any app can integrate.
+
+---
+
+## Core Concepts
+
+- **IdentityGuard** — tokenized identity and role classification (`CHILD`, `PARENT`, `SYSTEM`).
+- **PrivacyShield** — data classification, redaction, and minimization.
+- **PolicyEngine** — JSON/YAML policies for safety, privacy, and emotional rules.
+- **AuditTrail** — anonymous, structured event logging.
+- **CompanionInterface** — high-level API for apps to “ask” the Guardian what’s allowed.
+
+---
+
+## Getting Started
+
+### Installation
+
+```bash
+npm install guardian-companion
+# or
+yarn add guardian-companion
+
 # Modular Task Architecture — System Framework
 
 A lightweight, high‑complexity, low‑load task architecture designed by  
