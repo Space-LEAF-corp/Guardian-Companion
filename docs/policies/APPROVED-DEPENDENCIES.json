@@ -1,0 +1,72 @@
+{
+  "version": "1.0.0",
+  "generated": "2026-06-29",
+  "description": "Approved dependency list for Guardian-Companion. All dependencies must be version-pinned, hash-verified, emotionally safe, and free from known vulnerabilities.",
+
+  "dependencies": [
+    {
+      "name": "typescript",
+      "version": "5.4.0",
+      "integrity": "sha512-<hash>",
+      "reason": "Core language support for Guardian engine modules.",
+      "emotionalSafety": "LOW_RISK",
+      "status": "approved"
+    },
+    {
+      "name": "ts-node",
+      "version": "10.9.2",
+      "integrity": "sha512-<hash>",
+      "reason": "Development-time TypeScript execution.",
+      "emotionalSafety": "LOW_RISK",
+      "status": "approved"
+    },
+    {
+      "name": "jest",
+      "version": "29.7.0",
+      "integrity": "sha512-<hash>",
+      "reason": "Unit and integration testing for Guardian modules.",
+      "emotionalSafety": "LOW_RISK",
+      "status": "approved"
+    },
+    {
+      "name": "ts-jest",
+      "version": "29.1.1",
+      "integrity": "sha512-<hash>",
+      "reason": "TypeScript transformer for Jest.",
+      "emotionalSafety": "LOW_RISK",
+      "status": "approved"
+    },
+    {
+      "name": "eslint",
+      "version": "9.0.0",
+      "integrity": "sha512-<hash>",
+      "reason": "Code quality enforcement for Guardian engine.",
+      "emotionalSafety": "LOW_RISK",
+      "status": "approved"
+    },
+    {
+      "name": "prettier",
+      "version": "3.2.5",
+      "integrity": "sha512-<hash>",
+      "reason": "Formatting consistency across modules.",
+      "emotionalSafety": "LOW_RISK",
+      "status": "approved"
+    }
+  ],
+
+  "rules": {
+    "requireExactVersions": true,
+    "requireIntegrityHashes": true,
+    "blockDeprecatedPackages": true,
+    "blockUnmaintainedPackages": true,
+    "blockEmotionallyUnsafePackages": true,
+    "blockTelemetryPackages": true,
+    "blockSurveillancePackages": true
+  },
+
+  "ceremonialAlignment": {
+    "sealOfGuardianship": true,
+    "sealOfModularIntegrity": true,
+    "emotionalSafetyStandard": true
+  }
+}
