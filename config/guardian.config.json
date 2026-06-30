@@ -1,0 +1,58 @@
+{
+  "version": "1.0.0",
+  "description": "Global configuration for the Guardian-Companion engine. Defines policy paths, audit behavior, emotional safety parameters, and system defaults.",
+
+  "policies": {
+    "paths": [
+      "./policies/child-safety.json",
+      "./policies/system-safety.json",
+      "./policies/emotional-safety.json"
+    ],
+    "autoReload": true,
+    "strictMode": true
+  },
+
+  "audit": {
+    "enabled": true,
+    "redactMetadata": true,
+    "severityThreshold": "INFO",
+    "store": {
+      "local": true,
+      "encrypted": false,
+      "remoteRelay": false
+    }
+  },
+
+  "identity": {
+    "tokenize": true,
+    "defaultRole": "SYSTEM",
+    "allowAnonymous": true
+  },
+
+  "privacy": {
+    "minimizeByDefault": true,
+    "sanitizeMetadata": true,
+    "blockSensitiveForChildren": true
+  },
+
+  "emotionalSafety": {
+    "enabled": true,
+    "riskLevels": {
+      "HIGH": 0.85,
+      "MEDIUM": 0.45,
+      "LOW": 0.15
+    },
+    "defaultGuidance": {
+      "HIGH": "This content may be overwhelming. Please pause and seek support if needed.",
+      "MEDIUM": "Some elements may be emotionally intense. Consider switching to educational content.",
+      "LOW": "Content appears emotionally safe. Continue with awareness."
+    }
+  },
+
+  "system": {
+    "logStartup": true,
+    "logPolicyLoad": true,
+    "safeMode": false,
+    "allowTransformations": true
+  }
+}
